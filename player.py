@@ -12,7 +12,7 @@ class Player(object):
         self.isJump = False
         self.jumpCount = 10
         self.left = False
-        self.right = False
+        self.right = True
         self.walkCount = 0
         self.standing = True
         self.walkRight = spriteSheet.images_at([(0, 0, 64, 35), (64, 0, 64, 35), (128, 0, 64, 35), (192, 0, 64, 35), 

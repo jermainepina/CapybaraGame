@@ -79,8 +79,6 @@ class Level1:
             if not(player.isJump): 
                 if keys[pygame.K_UP]:
                     player.isJump = True
-                    player.left = False
-                    player.right = False
                     player.walkCount = 0
             else:
                 if player.jumpCount >= -10:
