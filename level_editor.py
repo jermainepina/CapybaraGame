@@ -10,8 +10,8 @@ fps = 60
 
 #game window
 tile_size = 40
-cols = 34
-rows = 19
+cols = 32
+rows = 18
 margin = 100
 screen_width = tile_size * cols
 screen_height = tile_size * rows + margin

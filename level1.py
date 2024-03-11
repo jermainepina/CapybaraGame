@@ -1,5 +1,8 @@
 import pygame
+from os import path
+import pickle
 from player import Player, Laser
+from world import World
 SCREENWIDTH, SCREENHEIGHT = 1280, 720
 FPS = 60
 
@@ -8,25 +11,25 @@ class Level1:
     def __init__(self, display, gameStateManager):
         self.display = display
         self.gameStateManager = gameStateManager
-        self.world = 
+        self.level = 1
         
         
         
-    def drawScreen(self, player, lasers):
+    def drawScreen(self, world, player, lasers):
         self.display.blit(pygame.image.load('img/background.png'), (0, 0))
+        world.draw(self.display)
         player.draw(self.display)
         for laser in lasers:
             laser.draw()
         pygame.display.update()
         
-    def draw_grid(self):
-        for line in range(0, 32):
-            pygame.draw.line(self.display, (255, 255, 255), (0, line * 40), (1280, line * 40))
-            pygame.draw.line(self.display, (255, 255, 255), (line * 40, 0), (line * 40, 720))
-
             
     def run(self):
         run = True
+        if path.exists(f'level{self.level}_data'):
+            pickle_in = open(f'level{self.level}_data', 'rb')
+            world_data = pickle.load(pickle_in)
+        world = World(world_data)
         player = Player(SCREENWIDTH / 2, SCREENHEIGHT - 75)
         lasers = []
         shootLoop = 0
@@ -101,10 +104,10 @@ class Level1:
                     
                     
             """ UPDATING SCREEN """
-            self.drawScreen(player, lasers)
-            self.draw_grid()
+            self.drawScreen(world, player, lasers)
             pygame.display.update()
-            pygame.time.Clock().tick(FPS)
+            clock = pygame.time.Clock()
+            clock.tick(FPS)
             
         self.gameStateManager.set_state('start')
             
