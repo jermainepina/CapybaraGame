@@ -3,7 +3,7 @@ import pygame
 
 class Player(object):
     def __init__(self, x, y):
-        spriteSheet = spritesheet.spritesheet('capybara_walking.png')
+        spriteSheet = spritesheet.spritesheet('img/capybara_walking.png')
         self.x = x
         self.y = y
         self.width = 64
@@ -38,7 +38,7 @@ class Player(object):
 
 class Laser(object):
     def __init__(self, x, y, direction, display):
-        spriteSheet = spritesheet.spritesheet('laser.png')
+        spriteSheet = spritesheet.spritesheet('img/laser.png')
         self.x = x
         self.y = y
         self.direction = direction

@@ -8,18 +8,26 @@ class Level1:
     def __init__(self, display, gameStateManager):
         self.display = display
         self.gameStateManager = gameStateManager
+        self.world = 
+        
+        
         
     def drawScreen(self, player, lasers):
-        self.display.blit(pygame.image.load('background.png'), (0, 0))
+        self.display.blit(pygame.image.load('img/background.png'), (0, 0))
         player.draw(self.display)
         for laser in lasers:
             laser.draw()
         pygame.display.update()
         
+    def draw_grid(self):
+        for line in range(0, 32):
+            pygame.draw.line(self.display, (255, 255, 255), (0, line * 40), (1280, line * 40))
+            pygame.draw.line(self.display, (255, 255, 255), (line * 40, 0), (line * 40, 720))
 
+            
     def run(self):
         run = True
-        player = Player(SCREENWIDTH / 2, 670)
+        player = Player(SCREENWIDTH / 2, SCREENHEIGHT - 75)
         lasers = []
         shootLoop = 0
         """   GAME LOOP   """
@@ -94,6 +102,7 @@ class Level1:
                     
             """ UPDATING SCREEN """
             self.drawScreen(player, lasers)
+            self.draw_grid()
             pygame.display.update()
             pygame.time.Clock().tick(FPS)
             
