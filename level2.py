@@ -4,7 +4,7 @@ SCREENWIDTH, SCREENHEIGHT = 1280, 720
 FPS = 60
 
 
-class Level1:
+class Level2:
     def __init__(self, display, gameStateManager):
         self.display = display
         self.gameStateManager = gameStateManager
@@ -52,8 +52,6 @@ class Level1:
                     if len(lasers) < 5 :
                         lasers.append(Laser(player.x + player.width, round(player.y + player.height // 2) - 10, direction, self.display))
                 shootLoop = 1
-            
-            # Hit logic here
             
             """   PLAYER MOVEMENT   """
             if keys[pygame.K_LEFT] and player.x - player.vel > 0:

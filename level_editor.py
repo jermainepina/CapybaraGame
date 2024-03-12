@@ -33,7 +33,7 @@ lava_img = pygame.image.load('img/lava.png')
 exit_img = pygame.image.load('img/exit.png')
 save_img = pygame.image.load('img/save.png')
 load_img = pygame.image.load('img/load.png')
-
+enemy_img = pygame.image.load('img/enemy.png')
 
 #define game variables
 clicked = False
@@ -107,6 +107,9 @@ def draw_world():
 					#exit
 					img = pygame.transform.scale(exit_img, (tile_size, tile_size))
 					screen.blit(img, (col * tile_size, row * tile_size))
+				if world_data[row][col] == 6:
+					#enemy blocks
+					screen.blit(enemy_img, (col * tile_size + 8, row * tile_size))
 
 
 

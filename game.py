@@ -3,6 +3,8 @@ import sys
 import spritesheet
 from player import Player, Laser
 from level1 import Level1
+from level2 import Level2
+from button import Button
 pygame.init()
 FONT = pygame.font.SysFont("arial", 30)
 SCREENWIDTH, SCREENHEIGHT = 1280, 720
@@ -16,10 +18,12 @@ class Game:
     
         self.gameStateManager = gameStateManager('start')
         self.start = Start(self.screen, self.gameStateManager)
-        self.level = Level1(self.screen, self.gameStateManager)
+        self.level1 = Level1(self.screen, self.gameStateManager)
+        self.level2 = Level2(self.screen, self.gameStateManager)
+        self.states = {'start': self.start, 'level1': self.level1, 'level2': self.level2}
     
-        self.states = {'start': self.start, 'level1': self.level}
-    
+        
+        
     def run(self):
         while True:
             for event in pygame.event.get():
@@ -38,13 +42,19 @@ class Start:
     def __init__(self, display, gameStateManager):
         self.display = display
         self.gameStateManager = gameStateManager
+        
     def run(self):
-        start_text = FONT.render("start", 1, "white")
-        self.display.fill('red')
-        self.display.blit(start_text, (0, 0))
-        keys = pygame.key.get_pressed()
-        if keys[pygame.K_e]:
-            self.gameStateManager.set_state('level1')
+        start = Button(SCREENWIDTH // 2 - 150, SCREENHEIGHT // 2 + 100, pygame.image.load('img/start.png'))
+        exit = Button(SCREENWIDTH // 2 + 50, SCREENHEIGHT // 2 + 100, pygame.image.load('img/exit.png'))
+       
+        self.display.blit(pygame.image.load('img/background.png'), (0, 0))
+        if start.draw(self.display):
+             self.gameStateManager.set_state('level1')
+        elif exit.draw(self.display):
+            pygame.quit()
+            sys.exit()
+        
+       
     
 class gameStateManager:
     def __init__(self, currentState):
