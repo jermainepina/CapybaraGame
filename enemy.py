@@ -29,7 +29,7 @@ class Enemy(pygame.sprite.Sprite):
         if not self.hit_once:
             self.kill()
             for frame in self.hit_animation_frames:
-                display.blit(frame, (self.rect.x - 40, self.rect.y + 40))
+                display.blit(frame, (self.rect.x - 40, self.rect.y - 40))
                 pygame.display.flip()
                 pygame.time.delay(self.hit_animation_speed)
             

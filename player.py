@@ -133,7 +133,7 @@ class Laser(pygame.sprite.Sprite):
         hit_enemies = pygame.sprite.spritecollide(self, enemies, False)
         for enemy in hit_enemies:
             print("Hit!")
-            enemy.hit()  # Call the method in the Enemy class for handling the hit.
+            enemy.hit(self.display)  # Call the method in the Enemy class for handling the hit.
         if hit_enemies:
             self.kill()  # Remove the laser when it hits an enemy.
 

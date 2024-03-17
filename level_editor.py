@@ -30,7 +30,8 @@ grass_img = pygame.image.load('img/grass.png')
 wood_img = pygame.image.load('img/wood.png')
 lava_img = pygame.image.load('img/lava.png')
 # coin_img = pygame.image.load('img/coin.png')
-exit_img = pygame.image.load('img/exit.png')
+exitbottom_img = pygame.image.load('img/exitbottom.png')
+exittop_img = pygame.image.load('img/exittop.png')
 save_img = pygame.image.load('img/save.png')
 load_img = pygame.image.load('img/load.png')
 enemy_img = pygame.image.load('img/enemy.png')
@@ -104,12 +105,16 @@ def draw_world():
 					img = pygame.transform.scale(wood_img, (tile_size, tile_size))
 					screen.blit(img, (col * tile_size, row * tile_size))
 				if world_data[row][col] == 5:
-					#exit
-					img = pygame.transform.scale(exit_img, (tile_size, tile_size))
+					#exit bottom
+					img = pygame.transform.scale(exitbottom_img, (tile_size, tile_size))
 					screen.blit(img, (col * tile_size, row * tile_size))
 				if world_data[row][col] == 6:
 					#enemy blocks
 					screen.blit(enemy_img, (col * tile_size + 8, row * tile_size))
+				if world_data[row][col] == 7:
+					#exit bottom
+					img = pygame.transform.scale(exittop_img, (tile_size, tile_size))
+					screen.blit(img, (col * tile_size, row * tile_size))
 
 
 
@@ -158,13 +163,13 @@ while run:
 	#load and save level
 	if save_button.draw():
 		#save level data
-		pickle_out = open(f'level{level}_data', 'wb')
+		pickle_out = open(f'level_data/level{level}_data', 'wb')
 		pickle.dump(world_data, pickle_out)
 		pickle_out.close()
 	if load_button.draw():
 		#load in level data
-		if path.exists(f'level{level}_data'):
-			pickle_in = open(f'level{level}_data', 'rb')
+		if path.exists(f'level_data/level{level}_data'):
+			pickle_in = open(f'level_data/level{level}_data', 'rb')
 			world_data = pickle.load(pickle_in)
 
 
